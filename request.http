@@ -1,0 +1,76 @@
+### Register
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name": "Kasumi",
+    "email": "kasumi@gmail.com",
+    "password": "kasumigaoka"
+}
+
+### login
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "kasumi@gmail.com",
+    "password": "kasumigaoka"
+}
+
+### register user
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+    "name": "Mika",
+    "email": "mikhailovna@bmail.com",
+    "password": "blueArchive",
+    "identity_type": "Paspor",
+    "identity_number": "2234452",
+    "address": "Trinity, Tea party"
+}
+
+### index users
+GET http://localhost:3000/api/v1/users
+
+
+### detail users
+GET http://localhost:3000/api/v1/users/2
+
+
+### new bank account to existed user
+POST http://localhost:3000/api/v1/accounts
+Content-Type: application/json
+
+{
+    "users_id": "2",
+    "bank_name": "Bank Tabungan Tea Party",
+    "bank_account_number": "432244278",
+    "balance": 1000000
+}
+
+### index account
+GET http://localhost:3000/api/v1/accounts
+
+
+### detail account
+GET http://localhost:3000/api/v1/accounts/2
+
+
+### transfering money
+POST http://localhost:3000/api/v1/transactions
+Content-Type: application/json
+
+{
+    "source_account_id": "1",
+    "destination_account_id": "2",
+    "amount": 1000
+}
+
+
+### index transaction
+GET http://localhost:3000/api/v1/transactions
+
+
+### detail transaction
+GET http://localhost:3000/api/v1/transactions/1
