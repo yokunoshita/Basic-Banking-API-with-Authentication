@@ -7,7 +7,21 @@ module.exports = {
     create: async (req, res, next) => {
         try {
             let {users_id,bank_name, bank_account_number, balance} = req.body;
+            let exist = prisma.users.findFirst({where: {users_id}});
 
+            if (!exist) {
+                return res.status(400).json({
+                    status: false,
+                    message: 'Invalid id'
+                });
+            }
+
+            if (!bank_name || !bank_account_number || !balance ) {
+                return res.status(400).json({
+                    status: false,
+                    message: 'Please fill all requirments'
+                });
+            }
             let newAccount = await prisma.bankAccount.create({
                 data:{
                     bank_name,   
@@ -26,7 +40,7 @@ module.exports = {
             });
             
         } catch (error) {
-            next(error)
+            next(error);
         }
     },
 
@@ -45,7 +59,7 @@ module.exports = {
                 data: listAccount
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     },
 
@@ -73,7 +87,7 @@ module.exports = {
                 data: account
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
-    },
-}
+    }
+};

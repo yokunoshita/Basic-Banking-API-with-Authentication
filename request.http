@@ -4,8 +4,11 @@ Content-Type: application/json
 
 {
     "name": "Kasumi",
-    "email": "kasumi@gmail.com",
-    "password": "kasumigaoka"
+    "email": "kasummi@gmail.com",
+    "password": "kasumigaoka",
+    "identity_type": "Paspor",
+    "identity_number": "2234452",
+    "address": "Trinity, Tea party"
 }
 
 ### login
@@ -13,9 +16,13 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "kasumi@gmail.com",
+    "email": "kasummi@gmail.com",
     "password": "kasumigaoka"
 }
+
+### Authenticate
+GET http://localhost:3000/api/v1/auth/authenticate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTksIm5hbWUiOiJLYXN1bWkiLCJlbWFpbCI6Imthc3VtbWlAZ21haWwuY29tIiwiaWF0IjoxNzEzNjU3MDcxfQ.9nJqcl5rCl1hWoa0PCR2d4hYvmTC3WKd861jR6vywLc
 
 ### register user
 POST http://localhost:3000/api/v1/users
@@ -35,7 +42,7 @@ GET http://localhost:3000/api/v1/users
 
 
 ### detail users
-GET http://localhost:3000/api/v1/users/2
+GET http://localhost:3000/api/v1/users/44
 
 
 ### new bank account to existed user
@@ -43,7 +50,7 @@ POST http://localhost:3000/api/v1/accounts
 Content-Type: application/json
 
 {
-    "users_id": "2",
+    "users_id": "66",
     "bank_name": "Bank Tabungan Tea Party",
     "bank_account_number": "432244278",
     "balance": 1000000
@@ -54,7 +61,7 @@ GET http://localhost:3000/api/v1/accounts
 
 
 ### detail account
-GET http://localhost:3000/api/v1/accounts/2
+GET http://localhost:3000/api/v1/accounts/1
 
 
 ### transfering money

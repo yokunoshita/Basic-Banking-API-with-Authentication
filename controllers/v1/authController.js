@@ -8,11 +8,11 @@ const { MAGIC_WORD } = process.env;
 module.exports = {
     register: async (req, res, next) => {
         try {
-            let { name, email, password  } = req.body;
+            let { name, email, password, identity_type, identity_number, address  } = req.body;
 
             let exist = await prisma.users.findFirst({where:{ email: email }});
 
-            if(!name || !email || !password){
+            if(!name || !email || !password || !identity_type || !identity_number || !address){
                 return res.status(400).json({
                     status: false,
                     message: "fill all requirments",
@@ -34,9 +34,21 @@ module.exports = {
                 data: {
                     name: name,
                     email: email,
-                    password: encryptedPw
+                    password: encryptedPw,
+                    profiles: {
+                        create: {
+                            identity_type,
+                            identity_number,
+                            address
+                        },
+                    },
+                },
+                include:{
+                    profiles: true
                 }
             });
+
+            delete user.password;
 
             res.status(201).json({
                 status: 'success',
@@ -58,7 +70,7 @@ module.exports = {
                 });
             }
 
-            let exist = await prisma.users.findUnique({where:{ email }});
+            let exist = await prisma.users.findFirst({where:{ email }});
             if (!exist) {
                 return res.status(400).json({
                     status: false,

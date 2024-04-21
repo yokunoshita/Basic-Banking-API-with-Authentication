@@ -9,7 +9,7 @@ module.exports = {
             let {name, email, password, identity_type, identity_number, address} = req.body;
 
             let exist = await prisma.users.findFirst({
-                where: {email}
+                where: { email }
             });
 
             if (exist) {
@@ -78,7 +78,7 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({
                     status: "false",
-                    message:"can\'t find user with id : "+id,
+                    message:"can\'t find user with id : "+userId,
                     data: null
                 });
             }
