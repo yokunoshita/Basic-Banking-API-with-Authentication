@@ -4,8 +4,8 @@ info:
   description: Submission challenge 5
   version: 1.0.0
 servers:
-  - url: POST http://localhost:3000/api/v1
-  
+  - url: http://localhost:3000/api/v1
+
 security:
   - bearerAuth: []  
 
@@ -200,6 +200,24 @@ paths:
                     type: string
                   message:
                     type: string
+    get:
+      summary: Get list of accounts
+      responses:
+        '200':
+          description: List of account retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
   /accounts/{id}:
     get:
       summary: Get account by ID
@@ -274,6 +292,24 @@ paths:
                     type: string
                   message:
                     type: string
+    get:
+      summary: Get list of transactions
+      responses:
+        '200':
+          description: List of transactions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
   /transactions/{id}:
     get:
       summary: Get transaction by ID
@@ -305,7 +341,7 @@ paths:
                     type: object
 components:
   securitySchemes:
-    bearerAuth:            # arbitrary name for the security scheme
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT 
