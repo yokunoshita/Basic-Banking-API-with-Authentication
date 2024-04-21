@@ -3,10 +3,11 @@ const authRouter = require('./authRouter');
 const userRouter = require('./userRouter');
 const accountRouter = require('./accountRouter');
 const transactionRouter = require('./transactionRouter');
+const restrict = require('../../middlewares/auth.middleware');
 
 router.use('/auth', authRouter)
-router.use('/users', userRouter);
-router.use('/accounts', accountRouter);
-router.use('/transactions', transactionRouter);
+router.use('/users', restrict, userRouter);
+router.use('/accounts', restrict, accountRouter);
+router.use('/transactions', restrict, transactionRouter);
 
 module.exports = router;
